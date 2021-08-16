@@ -27,7 +27,7 @@ void generate_password(int length)
 
     string alphabet = "abcdefghijklmnopqrstuvwxyz";
     string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    string s_symbol = "!@#$%&";
+    string s_symbol = "!@#$%&:)(-_=";
     string number = "0123456789";
 
     int key, count_alphabet = 0, count_ALPHABET = 0, count_number = 0, count_s_symbol = 0;
@@ -104,7 +104,7 @@ int main()
     //Меню
     do {
         cout << "\n-----------------------------\n";
-        cout << "  Random Password Generator\n";
+        cout << "      Генератор паролей \n";
         cout << "------------------------------\n\n";
         cout << "    1. Сгенерировать пароль"
             << "\n";
@@ -115,31 +115,31 @@ int main()
 
         switch (opt) {
         case 1:
-            cout << "Enter Length :  ";
+            cout << "Введите длину пароля :  ";
             cin >> length;
-            //if length is less than 7 , program  will show error
+            // Если длина меньше 7, программа покажет ошибку
             if (length < 7) {
-                cout << "\nError : Password Length Should be atleast 7\n";
-                cout << "Press any key to try again \n";
+                cout << "\nОшибка : Длина пароля должна быть не менее 7 символов\n";
+                cout << "Нажмите любую кнопку для продолжения \n";
                 getchar();
             }
-            // Length should not exceed 100 , program should show error if it exceeds
+            // Длина не должна превышать 100 символов, если превышает , то будет ошибка
             else if (length > 100) {
-                cout << "\nError : Maximum length of password should be 100\n";
-                cout << "Press any key to try again \n";
+                cout << "\nОшибка : Длина пароля не должна быть более 100 символов\n";
+                cout << "Нажмите любую кнопку для продолжения \n";
                 getchar();
             }
-            //Otherwise call generate_password() function to generate password
+            // В противном случае вызовите функцию generate_password () для генерации пароля.
             else
                 generate_password(length);
             break;
 
         default:
-            // If invalid option is chosen by user it will also show error
+            // Если пользователь выбрал недопустимый вариант, он также покажет ошибку
             if (opt != 2) {
-                printf("\nInvalid choice\n");
-                printf("Please Press ( 1 ) to generate password and ( 2 ) to exit.\n");
-                cout << "Press any key to try again \n";
+                printf("\nНеправильый выбор\n");
+                printf("Нажмите пожалуйста кнопку 1 для генерации пароля и кнопку 2 для выхода из программы.\n");
+                cout << "Нажмите любую кнопку для повторения \n";
                 getchar();
             }
             break;

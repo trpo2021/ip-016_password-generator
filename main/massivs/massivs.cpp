@@ -90,10 +90,10 @@ void generate_password(int length)
     }
 
     cout << "\n-----------------------------\n";
-    cout << "         Password             \n";
+    cout << "         Пароль             \n";
     cout << "------------------------------\n\n";
     cout << " " << password;
-    cout << "\n\nPress any key continue \n";
+    cout << "\n\nНажмите любую кнопку для продолжения \n";
     getchar();
 }
 
@@ -101,16 +101,16 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
     int opt, length;
-    //Menu
+    //Меню
     do {
         cout << "\n-----------------------------\n";
         cout << "  Random Password Generator\n";
         cout << "------------------------------\n\n";
-        cout << "    1. Generate Password"
+        cout << "    1. Сгенерировать пароль"
             << "\n";
-        cout << "    2. Exit"
+        cout << "    2. Выход"
             << "\n\n";
-        cout << "Press key 1 to Generate Password and key 2 to exit  : ";
+        cout << "Нажмите кнопку 1 для генерации пароля и кнопку 2 для выхода из программы  : ";
         cin >> opt;
 
         switch (opt) {

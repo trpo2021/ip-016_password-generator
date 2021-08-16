@@ -96,8 +96,10 @@ void generate_password(int length)
     cout << "\n\nPress any key continue \n";
     getchar();
 }
+
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     int opt, length;
     //Menu
     do {

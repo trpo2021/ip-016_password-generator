@@ -1,3 +1,3 @@
-#Password Generator
+#Password Generator C++#
 
-##Генератор паролей
+##Генератор паролей##

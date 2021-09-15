@@ -2,9 +2,11 @@ CC = g++
 CXXFLAGS = -std=c++11 -Wall
 LDFLAGS = 
 
-APPNAME = Password Generator
+APPNAME = generator
+LIBNAME = libgenerator
+
 EXT = .cpp
-SRCDIR = ip-016_password-generator\src\generator
+SRCDIR = src
 OBJDIR = obj
 
 SRC = $(wildcard $(SRCDIR)/*$(EXT))

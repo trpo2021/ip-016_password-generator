@@ -4,7 +4,7 @@ LDFLAGS =
 
 APPNAME = Password Generator
 EXT = .cpp
-SRCDIR = ip-016_password-generator\main\massivs
+SRCDIR = ip-016_password-generator\src\generator
 OBJDIR = obj
 
 SRC = $(wildcard $(SRCDIR)/*$(EXT))

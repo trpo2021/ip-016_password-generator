@@ -1,11 +1,9 @@
-﻿#pragma once
+﻿#ifndef FUNCTION_H
+#define FUNCTION_H
 
-#include <iostream>
-#include <random>
-
-using namespace std;
-random_device rd;
-
-
+void generate_password(int length);
+int getKey();
 int selectArray();
+
+#endif
 

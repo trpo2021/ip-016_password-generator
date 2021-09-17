@@ -1,4 +1,4 @@
-﻿#include "libgenerator/function.h"
+﻿#include "libgenerator/lib.h"
 #include <iostream>
 #include <ctime>
 #include <time.h>

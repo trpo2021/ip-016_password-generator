@@ -1,48 +1,66 @@
-CC = g++
-CXXFLAGS = -std=c++11 -Wall
-LDFLAGS = 
+APP_NAME = generator
+TEST_NAME = test
+LIB_NAME = libgenerator
 
-APPNAME = generator
-LIBNAME = libgenerator
+CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -I src -I thirdparty -MP -MMD
+LDFLAGS =
+LDLIBS =
 
-EXT = .cpp
-SRCDIR = src
-OBJDIR = obj
+CC=g++
 
-SRC = $(wildcard $(SRCDIR)/*$(EXT))
-OBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)/%.o)
-DEP = $(OBJ:$(OBJDIR)/%.o=%.d)
-RM = rm
-DELOBJ = $(OBJ)
-DEL = del
-EXE = .exe
-WDELOBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)\\%.o)
+BIN_DIR = bin
+OBJ_DIR = obj
+SRC_DIR = src
+TEST_DIR = test
+TP_DIR = thirdparty
 
-all: $(APPNAME)
+APP_PATH = $(BIN_DIR)/$(APP_NAME)
+TEST_PATH = $(BIN_DIR)/$(TEST_NAME)
+CTEST_PATH = $(TP_DIR)/ctest.h
+LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
 
-$(APPNAME): $(OBJ)
-	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+SRC_EXT = cpp
 
-%.d: $(SRCDIR)/%$(EXT)
-	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+APP_SOURCES = $(shell find $(SRC_DIR)/$(APP_NAME) -name '*.$(SRC_EXT)')
+APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+TEST_SOURCES = $(shell find $(TEST_DIR)/ -name '*.$(SRC_EXT)')
+TEST_OBJECTS = $(TEST_SOURCES:$(TEST_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(TEST_DIR)/%.o)
+LIB_SOURCES = $(shell find $(SRC_DIR)/$(LIB_NAME) -name '*.$(SRC_EXT)')
+LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
 
--include $(DEP)
+DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d) $(TEST_OBJECTS:.o=.d)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%$(EXT)
-	$(CC) $(CXXFLAGS) -o $@ -c $<
+.PHONY: all
+all: $(APP_PATH)
+
+-include $(DEPS)
+
+$(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
+
+$(LIB_PATH): $(LIB_OBJECTS)
+	ar rcs $@ $^
+
+$(OBJ_DIR)/%.o: %.cpp
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+.PHONY: test
+
+test: $(TEST_PATH)
+	$(TEST_PATH)
+	
+$(TEST_PATH): $(TEST_OBJECTS) $(LIB_PATH) $(CTEST_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(TEST_OBJECTS) $(LIB_PATH) -o $@ $(LDFLAGS) $(LDLIBS)
+
+$(LIB_PATH): $(LIB_OBJECTS)
+	ar rcs $@ $^
+
+$(OBJ_DIR)/%.o: %.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 .PHONY: clean
 clean:
-	$(RM) $(DELOBJ) $(DEP) $(APPNAME)
-
-.PHONY: cleandep
-cleandep:
-	$(RM) $(DEP)
-
-.PHONY: cleanw
-cleanw:
-	$(DEL) $(WDELOBJ) $(DEP) $(APPNAME)$(EXE)
-
-.PHONY: cleandepw
-cleandepw:
-	$(DEL) $(DEP)
+	$(RM) $(APP_PATH) $(LIB_PATH)
+	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
+	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;

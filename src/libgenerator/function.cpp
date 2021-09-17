@@ -1,11 +1,12 @@
 ﻿#include <iostream>
 #include <random>
+#include "libgenerator/lib.h"
 
 using namespace std;
-random_device rd;
 
 int getKey()
 {
+    random_device rd;
     mt19937 mersenne(rd());
 
     int key = mersenne() % 26;
@@ -14,12 +15,13 @@ int getKey()
 
 int selectArray()
 {
+    random_device rd;
     mt19937 mersenne(rd());
     int i = mersenne() % 4 + 1;
     return i;
 }
 
-void generate_password(int length)
+ void generate_password(int length)
 {
     string password = "";
 
@@ -31,13 +33,16 @@ void generate_password(int length)
     int key, count_alphabet = 0, count_ALPHABET = 0, count_number = 0, count_s_symbol = 0;
 
     int count = 0;
-    while (count < length) {
+    while (count < length) 
+    {
         int k = selectArray();
 
-        if (count == 0) {
-            k = k % 3 + 1;
+        if (count == 0) 
+        {
+            k = k + 1;
         }
-        switch (k) {
+        switch (k) 
+        {
         case 1:
 
             if ((count_alphabet == 2)
@@ -92,6 +97,7 @@ void generate_password(int length)
             break;
         }
     }
+
 
     cout << "\n-----------------------------\n";
     cout << "         Пароль             \n";

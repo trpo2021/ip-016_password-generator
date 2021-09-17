@@ -1,9 +1,8 @@
-﻿#ifndef LIB_H
-#define LIB_H
+﻿#pragma once
+
+using namespace std;
 
 void generate_password(int length);
 int getKey();
 int selectArray();
-
-#endif
 

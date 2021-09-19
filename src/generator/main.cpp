@@ -15,7 +15,8 @@ int main()
     cout << "Нажмите кнопку 1 для генерации пароля и кнопку 2 для выхода из программы  : ";
     cin >> opt;
     exit = selectAction(opt);
-    if (opt > 0) {
+    if (exit > 0) 
+    {
         length = exit;
         password = generate_password(length);
         cout << "\n-----------------------------\n";

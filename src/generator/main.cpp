@@ -25,7 +25,6 @@ int main()
         for (int i = 0; i < length; i++) {
             cout << password[i];
         }
-        cout << "\n\nНажмите любую кнопку для продолжения \n";
     }
 
     delete[] password;

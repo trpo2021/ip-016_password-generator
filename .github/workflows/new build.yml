@@ -16,7 +16,7 @@ jobs:
         run: make test
       
       - name: Run test
-        run: bin/password_generator_test
+        run: test/main
 
       - name: Build application
         run: make

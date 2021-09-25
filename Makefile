@@ -1,60 +1,56 @@
-CC = g++
-CFLAGS = -Wall -Wextra -Wpedantic -Werror
-CPPFLAGS = -MMD -I src -I test
-TEST_PATH = /test
+APP_NAME = generator
+LIB_NAME = libgenerator
+APP_TEST_NAME = password_generator_test
 
-APPLICATION_NAME = generator
-APPLICATION_LIB = libgenerator
+CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -I src -I thirdparty -MP -MMD
+GDB = -g -O0
 
-SRC = src
-BIN = bin
-OBJ = obj
+BIN_DIR = bin
+OBJ_DIR = obj
+SRC_DIR = src
+TEST_DIR = test
 
-APPLICATION_PATH = $(BIN)/$(APPLICATION_NAME)/$(APPLICATION_NAME)
-LIBRARY_PATH = $(OBJ)/$(SRC)/$(APPLICATION_LIB)/$(APPLICATION_LIB).a
+APP_PATH = $(BIN_DIR)/$(APP_NAME)
+LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
+TEST_PATH = $(BIN_DIR)/$(TEST_DIR)/$(APP_TEST_NAME)
 
-APPLICATION_SRC = $(shell find $(SRC)/$(APPLICATION_NAME) -name '*.cpp')
-APPLICATION_OBJ = $(APPLICATION_SRC:$(SRC)/%.cpp=$(OBJ)/$(SRC)/%.o)
+SRC_EXT = cpp
 
-LIBRARY_SRC = $(shell find $(SRC)/$(APPLIACATION_LIB) -name '*.cpp')
-LIBRARY_OBJ = $(LIBRARY_SRC:$(SRC)/%.cpp=$(OBJ)/$(SRC)/%.o)
+APP_SOURCES = $(shell find $(SRC_DIR)/$(APP_NAME) -name '*.$(SRC_EXT)')
+APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+APP_TEST_SOURCES = $(shell find $(TEST_DIR) -name '*.$(SRC_EXT)')
+APP_TEST_OBJECTS = $(APP_TEST_SOURCES:$(TEST_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(TEST_DIR)/%.o)
 
-TEST_SOURCES = $(wildcard test/*.cpp)
-TEST_OBJECTS = $(TEST_SOURCES:test/%.cpp=$(OBJ)/test/%.o)
+LIB_SOURCES = $(shell find $(SRC_DIR)/$(LIB_NAME) -name '*.$(SRC_EXT)')
+LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
 
-TEST_APP_SOURCES = $(shell find $(SRC)/$(APPLICATION_NAME) -name '*.cpp') $(shell find $(SRC)/$(APPLIACATION_LIB) -name '*.cpp')
-TEST_APP_OBJECTS = $(TEST_APP_SOURCES:$(SRC)/%.cpp=$(OBJ)/test/$(SRC)/%.o)
+DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d)
 
-DEPENDENCIES = $(APPLICATION_OBJ:.o=.d)
+.PHONY: all clean test
 
-.PHONY: all
-all: $(APPLICATION_PATH)
--include $(DEPENDENCIES)
+all: $(APP_PATH)
 
+-include $(DEPS)
 
-$(APPLICATION_PATH): $(APPLICATION_OBJ) $(LIBRARY_PATH)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $^
-	
-$(OBJ)/%.o: %.cpp
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
-	
-$(LIBRARY_PATH): $(LIBRARY_OBJ)
+$(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
+	g++ $(CFLAGS) $(GDB) $(CPPFLAGS) $^ -o $@ -lm
+
+$(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
 
-$(OBJ)/test/%.o: %.cpp
-	$(CC) $(CPPFLAGS) $(CFLAGS) -DTEST -c $< -o $@
+$(OBJ_DIR)/%.o: %.cpp
+	g++ -c $(CFLAGS) $(GDB) $(CPPFLAGS) $< -o $@
 
-$(TEST_PATH): $(TEST_APP_OBJECTS) $(TEST_OBJECTS)
-	$(CC) $^ -o $@ $(CPPFLAGS) $(CFLAGS)
-
-
-.PHONY: test
 test: $(TEST_PATH)
 
+$(OBJ_DIR)/$(TEST_DIR)/%.o: %.cpp
+	g++ -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
-.PHONY: clean
+$(TEST_PATH): $(APP_TEST_OBJECTS) $(LIB_PATH)
+	g++ $(CFLAGS) $(CPPFLAGS) $^ -o $@ -lm
+
 clean:
-	$(RM) $(APPLICATION_PATH)
-	find $(OBJ) -name '*.o' -exec $(RM) '{}' \;
-	find $(OBJ) -name '*.d' -exec $(RM) '{}' \;
-	find $(OBJ) -name '*.a' -exec $(RM) '{}' \;
+	$(RM) $(APP_PATH) $(LIB_PATH) $(TEST_PATH)
+	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
+	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;

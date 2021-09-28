@@ -24,7 +24,7 @@ union ctest_run_func_union {
     ctest_unary_run_func unary;
 };
 
-#define CTEST_IMPL_PRAGMA(x) _Pragma(#x)
+#define CTEST_IMPL_PRAGMA(x) Pragma(#x)
 
 #if defined(__GNUC__)
 #if defined(__clang__) || __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)

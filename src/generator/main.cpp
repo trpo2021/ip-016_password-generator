@@ -15,15 +15,13 @@ int main()
     cout << "Нажмите кнопку 1 для генерации пароля и кнопку 2 для выхода из программы  : ";
     cin >> opt;
     exit = selectAction(opt);
-    if (exit > 0) 
-    {
+    if (exit > 0) {
         length = exit;
         password = generate_password(length);
         cout << "\n-----------------------------\n";
         cout << "         Пароль             \n";
         cout << "------------------------------\n\n";
-        for (int i = 0; i < length; i++) 
-        {
+        for (int i = 0; i < length; i++) {
             cout << password[i];
         }
     }

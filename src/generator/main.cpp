@@ -22,7 +22,8 @@ int main()
         cout << "\n-----------------------------\n";
         cout << "         Пароль             \n";
         cout << "------------------------------\n\n";
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) 
+        {
             cout << password[i];
         }
     }

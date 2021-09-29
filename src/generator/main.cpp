@@ -1,4 +1,6 @@
 #include "libgenerator/function.h"
+#include <fstream>
+#include <string>
 
 int main()
 {
@@ -25,6 +27,12 @@ int main()
             cout << password[i];
         }
     }
+
+    ofstream out("ip-016_password-generator\password.txt", ios::app);
+    if (out.is_open()) {
+        out << password << endl;
+    }
+    out.close();
 
     delete[] password;
 

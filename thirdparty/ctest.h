@@ -47,7 +47,7 @@ union ctest_run_func_union {
 #define CTEST_IMPL_DIAG_PUSH_IGNORED(w)    \
     CTEST_IMPL_PRAGMA(G++ diagnostic push) \
     CTEST_IMPL_PRAGMA(G++ diagnostic ignored "-W" #w)
-#define CTEST_IMPL_DIAG_POP() CTEST_IMPL_PRAGMA(GCC diagnostic pop)
+#define CTEST_IMPL_DIAG_POP() CTEST_IMPL_PRAGMA(G++ diagnostic pop)
 #else
 /* the push/pop functionality wasn't in gcc until 4.6, fallback to "ignored"  */
 #define CTEST_IMPL_DIAG_PUSH_IGNORED(w) CTEST_IMPL_PRAGMA(G++ diagnostic ignored "-W" #w)

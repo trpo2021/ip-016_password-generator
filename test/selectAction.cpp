@@ -10,4 +10,3 @@ CTEST(selectAction, exit)
     int real = selectAction(opt_exit);
     ASSERT_EQUAL(expect, real);
 }
-

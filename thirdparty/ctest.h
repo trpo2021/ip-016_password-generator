@@ -45,12 +45,12 @@ union ctest_run_func_union {
 #if defined(__clang__) || __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
 /* the GCC argument will work for both gcc and clang  */
 #define CTEST_IMPL_DIAG_PUSH_IGNORED(w)    \
-    CTEST_IMPL_PRAGMA(GCC diagnostic push) \
-    CTEST_IMPL_PRAGMA(GCC diagnostic ignored "-W" #w)
+    CTEST_IMPL_PRAGMA(G++ diagnostic push) \
+    CTEST_IMPL_PRAGMA(G++ diagnostic ignored "-W" #w)
 #define CTEST_IMPL_DIAG_POP() CTEST_IMPL_PRAGMA(GCC diagnostic pop)
 #else
 /* the push/pop functionality wasn't in gcc until 4.6, fallback to "ignored"  */
-#define CTEST_IMPL_DIAG_PUSH_IGNORED(w) CTEST_IMPL_PRAGMA(GCC diagnostic ignored "-W" #w)
+#define CTEST_IMPL_DIAG_PUSH_IGNORED(w) CTEST_IMPL_PRAGMA(G++ diagnostic ignored "-W" #w)
 #define CTEST_IMPL_DIAG_POP()
 #endif
 #else

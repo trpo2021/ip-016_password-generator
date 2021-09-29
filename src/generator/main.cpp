@@ -1,7 +1,7 @@
 #include "libgenerator/function.h"
 #include <fstream>
-#include <string>
 #include <iostream>
+#include <string>
 
 int main()
 {
@@ -34,7 +34,6 @@ int main()
         out << password << endl;
     }
     out.close();
-
 
     delete[] password;
 

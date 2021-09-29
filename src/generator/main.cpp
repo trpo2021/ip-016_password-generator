@@ -28,7 +28,7 @@ int main()
         }
     }
 
-    ofstream out("ip-016_password-generator\password.txt", ios::app);
+    ofstream out("ip-016_password-generator/password.txt", ios::app);
     if (out.is_open()) {
         out << password << endl;
     }

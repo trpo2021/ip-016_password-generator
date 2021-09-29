@@ -34,7 +34,7 @@ all: $(APP_PATH)
 -include $(DEPS)
 
 $(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
-	g++ $(CFLAGS) $(GDB) $(CPPFLAGS) $^ -o $@ -lm
+	g++ $(CFLAGS) $(GDB) $(CPPFLAGS) $^ -o $@ 
 
 $(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
@@ -48,7 +48,7 @@ $(OBJ_DIR)/$(TEST_DIR)/%.o: %.cpp
 	g++ -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 $(TEST_PATH): $(APP_TEST_OBJECTS) $(LIB_PATH)
-	g++ $(CFLAGS) $(CPPFLAGS) $^ -o $@ -lm
+	g++ $(CFLAGS) $(CPPFLAGS) $^ -o $@ 
 
 clean:
 	$(RM) $(APP_PATH) $(LIB_PATH) $(TEST_PATH)

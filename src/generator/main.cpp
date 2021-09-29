@@ -36,7 +36,7 @@ int main()
 
     ifstream in("ip-016_password-generator/password.txt");
     if (in.is_open()) {
-        while (getline(in, password)) {
+        while (std::getline(in, password)) {
             cout << password << endl;
         }
     }

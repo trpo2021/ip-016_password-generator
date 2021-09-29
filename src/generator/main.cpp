@@ -1,6 +1,7 @@
 #include "libgenerator/function.h"
 #include <fstream>
 #include <string>
+#include <iostream>
 
 int main()
 {
@@ -36,7 +37,7 @@ int main()
 
     ifstream in("ip-016_password-generator/password.txt");
     if (in.is_open()) {
-        while (std::getline(in, password)) {
+        while (getline(in, password)) {
             cout << password << endl;
         }
     }

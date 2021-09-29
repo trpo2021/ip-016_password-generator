@@ -131,7 +131,7 @@ int selectAction(int opt)
             getchar();
             break;
 
-            default:
+        default:
             // Если пользователь выбрал недопустимый вариант, он также покажет ошибку
             if (opt != 2) {
                 printf("\nНеправильый выбор\n");

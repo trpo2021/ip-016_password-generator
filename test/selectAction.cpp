@@ -24,8 +24,10 @@ CTEST(selectAction, length)
         > 7 and < 100
         {
             int real = lenght;
-            ASSERT_EQUAL(expect, real);
 
             in.close();
 
             return 0;
+        }
+    ASSERT_EQUAL(expect, real);
+}

@@ -24,4 +24,3 @@ CTEST(selectAction, exit)
     int real = selectAction(1);
     ASSERT_EQUAL(200, real);
 }
-

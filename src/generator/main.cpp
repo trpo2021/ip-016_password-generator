@@ -35,13 +35,6 @@ int main()
     }
     out.close();
 
-    ifstream in("ip-016_password-generator/password.txt");
-    if (in.is_open()) {
-        while (getline(in, password)) {
-            cout << password << endl;
-        }
-    }
-    in.close();
 
     delete[] password;
 

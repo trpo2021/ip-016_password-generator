@@ -20,3 +20,11 @@ int b = is_empty(in)
 int real2 = 0
 ASSERT_EQUAL(b, real2);
 }
+
+CTEST(selectAction, empty)
+{
+ifstream in("ip-016_password-generator/password.txt");
+int b = is_empty(in)
+int real2 = 1
+ASSERT_NOTEQUAL(b, real2);
+}

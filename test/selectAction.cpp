@@ -35,7 +35,7 @@ CTEST(getKey, key)
     ASSERT_NOT_NULL(c);
 }
 
-CTEST(selectArray, key)
+CTEST(selectArray, i)
 {
     int q = selectArray();
     ASSERT_NOT_NULL(q);

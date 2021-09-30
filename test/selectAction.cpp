@@ -13,23 +13,10 @@ CTEST(selectAction, exit)
     ASSERT_EQUAL(expect, real);
 }
 
-CTEST(selectAction, length)
+CTEST(selectAction, empty)
 {
-    ifstream in("ip-016_password-generator/password.txt");
-    if (in.is_open()) {
-        while (getline(in, password)) {
-            cout << password << endl;
-        }
-    }
-    int lenght;
-    if lenght
-        > 7 and < 100
-        {
-            int real = lenght;
-
-            in.close();
-
-            return 0;
-        }
-    ASSERT_EQUAL(expect, real);
+ifstream in("ip-016_password-generator/password.txt");
+int b = is_empty(in)
+int real2 = 0
+ASSERT_EQUAL(b, real2);
 }

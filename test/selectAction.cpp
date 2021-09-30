@@ -26,5 +26,5 @@ CTEST(selectAction, empty)
 ifstream in("ip-016_password-generator/password.txt");
 int b = is_empty(in)
 int real2 = 1
-ASSERT_NOTEQUAL(b, real2);
+ASSERT_NOT_EQUAL(b, real2);
 }

@@ -22,10 +22,12 @@ CTEST(selectAction, empty)
 CTEST(selectAction, empty)
 {
     ifstream in("ip-016_password-generator/password.txt");
-    int b = is_empty(in) int real2 = 1 ASSERT_NOT_EQUAL(b, real2);
+    int b = is_empty(in);
+    int real2 = 1 ASSERT_NOT_EQUAL(b, real2);
 }
 
 CTEST(getKey, key)
 {
-    int c = getKey() ASSERT_NOT_NULL(c);
+    int c = getKey();
+    ASSERT_NOT_NULL(c);
 }

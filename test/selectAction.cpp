@@ -2,8 +2,8 @@
 #include "libgenerator/function.h"
 #include "libgenerator/openfiletest.h"
 #include <fstream>
-#include <string>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -17,7 +17,7 @@ CTEST(selectAction, exit)
 
 CTEST(selectAction, empty)
 {
-string path = "password.txt";
+    string path = "password.txt";
     fstream in;
     int testResult = openfiletest(in, path);
     int expect = 1;
@@ -26,10 +26,9 @@ string path = "password.txt";
 
 CTEST(selectAction, fail)
 {
-string path = "passasdfasdfword.txt";
+    string path = "passasdfasdfword.txt";
     fstream in;
     int testResult = openfiletest(in, path);
     int expect = 0;
     ASSERT_EQUAL(expect, testResult);
 }
-

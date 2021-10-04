@@ -99,7 +99,6 @@ int selectArray()
     int i = mersenne() % 4 + 1;
     return i;
 }
-      
 
 int selectAction(int opt)
 {

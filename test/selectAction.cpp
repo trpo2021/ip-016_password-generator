@@ -32,3 +32,22 @@ CTEST(selectAction, fail)
     int expect = 0;
     ASSERT_EQUAL(expect, testResult);
 }
+
+CTEST(selectAction, not_open)
+{
+    string path = "password.txt";
+    fstream in;
+    string symbol = "2";
+    int expect = 2;
+    int real = CheckSymbols(in, path, symbol);
+    ASSERT_EQUAL(expect, real);
+}
+CTEST(selectAction, open)
+{
+    string path = "password.txt";
+    fstream in;
+    string symbol = "6";
+    int expect = 1;
+    int real = CheckSymbols(in, path, symbol);
+    ASSERT_EQUAL(expect, real);
+}

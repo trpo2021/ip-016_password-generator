@@ -1,7 +1,9 @@
 #include "ctest.h"
 #include "libgenerator/function.h"
+#include "libgenerator/openfiletest.h"
 #include <fstream>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -15,28 +17,19 @@ CTEST(selectAction, exit)
 
 CTEST(selectAction, empty)
 {
-    ifstream in("ip-016_password-generator/password.txt");
-    int b = is_empty(in);
-    int real2 = 1;
-    ASSERT_EQUAL(b, real2);
+string path = "password.txt";
+    fstream in;
+    int testResult = openfiletest(in, path);
+    int expect = 1;
+    ASSERT_EQUAL(expect, testResult);
 }
 
-CTEST(selectAction, empty)
+CTEST(selectAction, fail)
 {
-    ifstream in("ip-016_password-generator/password.txt");
-    int b = is_empty(in);
-    int real2 = 0;
-    ASSERT_NOT_EQUAL(b, real2);
+string path = "passasdfasdfword.txt";
+    fstream in;
+    int testResult = openfiletest(in, path);
+    int expect = 0;
+    ASSERT_EQUAL(expect, testResult);
 }
 
-CTEST(getKey, key)
-{
-    int c = getKey();
-    ASSERT_NOT_NULL(c);
-}
-
-CTEST(selectArray, i)
-{
-    int q = selectArray();
-    ASSERT_NOT_NULL(q);
-}

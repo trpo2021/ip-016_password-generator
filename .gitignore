@@ -34,6 +34,7 @@
 *.out
 *.app
 *.h~
+*.cpp~
 
 bin/generator
 bin/test/password_generator_test

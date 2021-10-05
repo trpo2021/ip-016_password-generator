@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: CodeStyle
-        run: git ls-files *.{c,h} | xargs clang-format -i --verbose && git diff --exit-code
+        run: git ls-files *.{cpp,h} | xargs clang-format -i --verbose && git diff --exit-code
 
       - name: Build application
         run: make 

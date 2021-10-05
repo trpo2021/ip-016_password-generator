@@ -1,7 +1,7 @@
 #include "ctest.h"
+#include "libgenerator/CheckSymbols.h"
 #include "libgenerator/function.h"
 #include "libgenerator/openfiletest.h"
-#include "libgenerator/CheckSymbols.h"
 #include <fstream>
 #include <iostream>
 #include <string>

@@ -33,6 +33,7 @@
 *.exe
 *.out
 *.app
+*.h~
 
 bin/generator
 bin/test/password_generator_test

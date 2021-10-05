@@ -21,7 +21,8 @@ char* generate_password(int length)
     string number = "0123456789";
     int i = 0;
 
-    int key, count_alphabet = 0, count_ALPHABET = 0, count_number = 0, count_s_symbol = 0;
+    int key, count_alphabet = 0, count_ALPHABET = 0, count_number = 0,
+             count_s_symbol = 0;
 
     int count = 0;
     while (count < length) {
@@ -34,8 +35,8 @@ char* generate_password(int length)
         case 1:
 
             if ((count_alphabet == 2)
-                && (count_number == 0 || count_ALPHABET == 0 || count_ALPHABET == 1
-                    || count_s_symbol == 0))
+                && (count_number == 0 || count_ALPHABET == 0
+                    || count_ALPHABET == 1 || count_s_symbol == 0))
                 break;
 
             key = getKey();
@@ -48,8 +49,8 @@ char* generate_password(int length)
         case 2:
 
             if ((count_ALPHABET == 2)
-                && (count_number == 0 || count_alphabet == 0 || count_alphabet == 1
-                    || count_s_symbol == 0))
+                && (count_number == 0 || count_alphabet == 0
+                    || count_alphabet == 1 || count_s_symbol == 0))
                 break;
             key = getKey();
             password[i] = ALPHABET[key];
@@ -61,8 +62,9 @@ char* generate_password(int length)
         case 3:
 
             if ((count_number == 1)
-                && (count_alphabet == 0 || count_alphabet == 1 || count_ALPHABET == 1
-                    || count_ALPHABET == 0 || count_s_symbol == 0))
+                && (count_alphabet == 0 || count_alphabet == 1
+                    || count_ALPHABET == 1 || count_ALPHABET == 0
+                    || count_s_symbol == 0))
                 break;
 
             key = getKey();
@@ -76,8 +78,9 @@ char* generate_password(int length)
         case 4:
 
             if ((count_s_symbol == 1)
-                && (count_alphabet == 0 || count_alphabet == 1 || count_ALPHABET == 0
-                    || count_ALPHABET == 1 || count_number == 0))
+                && (count_alphabet == 0 || count_alphabet == 1
+                    || count_ALPHABET == 0 || count_ALPHABET == 1
+                    || count_number == 0))
                 break;
 
             key = getKey();
@@ -112,17 +115,21 @@ int selectAction(int opt)
             cin >> length;
             // Если длина меньше 7, программа покажет ошибку
             if (length < 7) {
-                cout << "\nОшибка : Длина пароля должна быть не менее 7 символов\n";
+                cout << "\nОшибка : Длина пароля должна быть не менее 7 "
+                        "символов\n";
                 cout << "Нажмите любую кнопку для продолжения \n";
                 getchar();
             }
-            // Длина не должна превышать 100 символов, если превышает , то будет ошибка
+            // Длина не должна превышать 100 символов, если превышает , то будет
+            // ошибка
             else if (length > 100) {
-                cout << "\nОшибка : Длина пароля не должна быть более 100 символов\n";
+                cout << "\nОшибка : Длина пароля не должна быть более 100 "
+                        "символов\n";
                 cout << "Нажмите любую кнопку для продолжения \n";
                 getchar();
             }
-            // В противном случае вызовите функцию generate_password () для генерации пароля.
+            // В противном случае вызовите функцию generate_password () для
+            // генерации пароля.
             else {
                 return length;
             }
@@ -130,10 +137,12 @@ int selectAction(int opt)
             break;
 
         default:
-            // Если пользователь выбрал недопустимый вариант, он также покажет ошибку
+            // Если пользователь выбрал недопустимый вариант, он также покажет
+            // ошибку
             if (opt != 2) {
                 printf("\nНеправильый выбор\n");
-                printf("Нажмите пожалуйста кнопку 1 для генерации пароля и кнопку 2 для выхода из "
+                printf("Нажмите пожалуйста кнопку 1 для генерации пароля и "
+                       "кнопку 2 для выхода из "
                        "программы.\n");
                 cout << "Нажмите любую кнопку для повторения \n";
                 getchar();
